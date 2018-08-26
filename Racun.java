@@ -1,54 +1,92 @@
 package atm;
 
+import java.util.InputMismatchException;
+
+import javax.management.InvalidAttributeValueException;
+
 public class Racun {
+    // stanje objekta
+    private int brojRacuna;
+    private String imeVlasnikaRacuna;
+    private double stanjeNaRacunu = 0;
 
-	// stanje objekta
-	private int brojRacuna;
-	private String imeVlasnikaRacuna;
-	private double stanjeNaRacunu = 0;
+    private static int ukupanBrojObjekata;
 
-	// konstruktor - no args
-	Racun() {
+    /** konstruktor - no args */
+    Racun() throws Exception {
+	this(0, null, 0);
 
+    }
+
+    /** konstruktor za postavljenje pocetnog stanja */
+    Racun(int brojRacuna, String imeVlasnikaRacuna, double stanjeNaRacunu) throws Exception {
+	setBrojRacuna(brojRacuna);
+	setImeVlasnikaRacuna(imeVlasnikaRacuna);
+	setStanjeNaRacunu(stanjeNaRacunu);
+
+	ukupanBrojObjekata++;
+
+    }
+
+    /******* geteri i seteri *****/
+    /** vrati broj racuna */
+    public int getBrojRacuna() {
+	return brojRacuna;
+    }
+
+    /** postavi broj racuna */
+    public void setBrojRacuna(int brojRacuna) throws Exception {
+	if (brojRacuna >= 0) {
+	    this.brojRacuna = brojRacuna;
+	} else {
+	    throw new InvalidAttributeValueException("Broj racuna nemoze biti negativan.");
 	}
+    }
 
-	// konstruktor za postavljenje pocetnog stanja
-	Racun(int brojRacuna, String imeVlasnikaRacuna, double stanjeNaRacunu) {
-		this.brojRacuna = brojRacuna;
-		this.imeVlasnikaRacuna = imeVlasnikaRacuna;
-		this.stanjeNaRacunu = stanjeNaRacunu;
+    /** vrati ime vlasnika racuna */
+    public String getImeVlasnikaRacuna() {
+	return imeVlasnikaRacuna;
+    }
 
+    /** postavi ime vlasnika racuna */
+    public void setImeVlasnikaRacuna(String imeVlasnikaRacuna) throws Exception {
+	boolean isLetter = true;
+	for (int i = 0; i < imeVlasnikaRacuna.length(); i++) {
+	    if (!(Character.isLetter(imeVlasnikaRacuna.charAt(i))) && !(imeVlasnikaRacuna.charAt(i) == ' ')) {
+		isLetter = false;
+		break;
+	    }
 	}
-
-	/* geteri i seteri */
-	public int getBrojRacuna() {
-		return brojRacuna;
+	if (isLetter) {
+	    this.imeVlasnikaRacuna = imeVlasnikaRacuna;
+	} else {
+	    throw new InputMismatchException("Karakteri imena moraju biti slova");
 	}
+    }
 
-	public void setBrojRacuna(int brojRacuna) {
-		this.brojRacuna = brojRacuna;
+    /** vrati stanje na racunu */
+    public double getStanjeNaRacunu() {
+	return stanjeNaRacunu;
+    }
+
+    /** postavi stanje na racunu */
+    public void setStanjeNaRacunu(double stanjeNaRacunu) throws Exception {
+	if (stanjeNaRacunu >= 0) {
+	    this.stanjeNaRacunu = stanjeNaRacunu;
+	} else {
+	    throw new InvalidAttributeValueException("Stanje na racunu nemoze biti negativno.");
 	}
+    }
 
-	public String getImeVlasnikaRacuna() {
-		return imeVlasnikaRacuna;
-	}
+    /** vrati ukupan broj instaciranih objekata */
+    public int getUkupanBrojObjekata() {
+	return ukupanBrojObjekata;
+    }
 
-	public void setImeVlasnikaRacuna(String imeVlasnikaRacuna) {
-		this.imeVlasnikaRacuna = imeVlasnikaRacuna;
-	}
-
-	public double getStanjeNaRacunu() {
-		return stanjeNaRacunu;
-	}
-
-	public void setStanjeNaRacunu(double stanjeNaRacunu) {
-		this.stanjeNaRacunu = stanjeNaRacunu;
-	}
-
-	@Override
-	public String toString() {
-		return "Racun [brojRacuna = " + brojRacuna + ", imeVlasnikaRacuna = " + imeVlasnikaRacuna
-				+ ", stanjeNaRacunu = " + stanjeNaRacunu + "]";
-	}
-
+    /** vrati informacije */
+    @Override
+    public String toString() {
+	return "Racun [brojRacuna = " + brojRacuna + ", imeVlasnikaRacuna = " + imeVlasnikaRacuna
+		+ ", stanjeNaRacunu = " + stanjeNaRacunu + "]";
+    }
 }
