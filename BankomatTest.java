@@ -1,5 +1,6 @@
 package atm;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BankomatTest {
@@ -25,7 +26,7 @@ public class BankomatTest {
     }
 
     public static void main(String[] args) {
-	// TODO Auto-generated method stub
+
 	Scanner input = new Scanner(System.in);
 
 	Bankomat bankomat = new Bankomat();
@@ -36,6 +37,7 @@ public class BankomatTest {
 	byte opcija = -1;
 
 	while (opcija != 0) {
+	    try {
 	    System.out.println("Izaberite opciju:" + "\n1 -> kreiranje racuna"
 		    + "\n2 -> Prebacivanje novca sa jednog racuna na drugi"
 		    + "\n3 -> Ispisivanje detalja postojecih racuna" + "\n0 -> za izlaz");
@@ -57,7 +59,7 @@ public class BankomatTest {
 		    bankomat.kreirajRacun(brojRacuna, imeVlasnikaRacuna, stanjeNaRacunu);
 		} catch (Exception ex) {
 		    ex.printStackTrace();
-		}
+		} 
 
 	    } else if (opcija == 2) {
 		try {
@@ -91,8 +93,11 @@ public class BankomatTest {
 		opcija = input.nextByte();
 	    }
 
+	} catch (InputMismatchException ex) {
+	    System.out.println("Pogrsan unsos!");
+	    input.nextLine();
 	}
-
+	}
 	System.out.println("Kraj aplikacije.");
 
 	input.close();
