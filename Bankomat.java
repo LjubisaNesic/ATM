@@ -84,16 +84,7 @@ public class Bankomat {
 	}
     }
 
-    /** metoda za dodavanje depozita na racun */
-    /*
-     * public void depozit(int brojRacuna, double depozit) { if (depozit < 10) {
-     * System.out. println("Minimalni dozvoljeni depozit je 10 novcanih jedinica.");
-     * System.out.println("\n"); } else { for (int i = 0; i < racuni.size(); i++) {
-     * if (brojRacuna == racuni.get(i).getBrojRacuna()) {
-     * racuni.get(i).setStanjeNaRacunu(racuni.get(i).getStanjeNaRacunu() + depozit);
-     * } else { System.out.println("Nepostojeci racun."); System.out.println("\n");
-     * break; } } } } /* /** metoda za ispis svih racuna
-     */
+  
 
     /** metoda za ispisivanje informacija svih racuna */
     public void informacije() {
